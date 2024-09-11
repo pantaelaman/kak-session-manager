@@ -1,0 +1,9 @@
+[package]
+name = "kak-session-manager"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+interprocess = { version = "2.2.1", features = ["tokio"] }
+tokio = { version = "1.40.0", features = ["rt-multi-thread", "fs", "net", "sync", "macros", "rt"] }
+tokio-macros = "2.4.0"
