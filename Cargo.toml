@@ -1,0 +1,9 @@
+[package]
+name = "kak-session-manager-plugin"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+zellij-tile = "0.40.1"
+kak-session-manager-client = { git = "https://github.com/pantaelaman/kak-session-manager.git", branch = "lib" }
+color-eyre = "0.6.3"
