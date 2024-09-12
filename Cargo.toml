@@ -5,5 +5,4 @@ edition = "2021"
 
 [dependencies]
 color-eyre = "0.6.3"
-interprocess = "2.2.1"
 oneshot = "0.1.8"

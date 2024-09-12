@@ -1,18 +1,16 @@
 #![feature(result_flattening)]
 use std::{
   io::{BufReader, Write},
+  net::{Ipv4Addr, TcpStream},
   sync::mpsc,
 };
 
 use color_eyre::eyre::{eyre, Error, Result};
-use interprocess::local_socket::{traits, GenericNamespaced, Stream, ToNsName};
+
+const PORT: u16 = 2843;
 
 pub fn run_server(name: &str) -> std::io::Result<ClientInstance> {
-  let stream = <Stream as traits::Stream>::connect(
-    "kak-manager.sock"
-      .to_ns_name::<GenericNamespaced>()
-      .unwrap(),
-  )?;
+  let stream = TcpStream::connect((Ipv4Addr::new(127, 0, 0, 1), PORT))?;
 
   let (tx, rx) = mpsc::channel();
 
