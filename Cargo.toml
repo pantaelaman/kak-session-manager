@@ -5,6 +5,5 @@ edition = "2021"
 
 [dependencies]
 color-eyre = "0.6.3"
-interprocess = { version = "2.2.1", features = ["tokio"] }
-tokio = { version = "1.40.0", features = ["rt-multi-thread", "fs", "net", "sync", "macros", "rt"] }
+tokio = { version = "1.40.0", features = ["rt-multi-thread", "fs", "net", "sync", "macros", "rt", "io-util"] }
 tokio-macros = "2.4.0"

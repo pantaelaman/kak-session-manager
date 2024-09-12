@@ -1,31 +1,22 @@
 use core::str;
 use std::{
-  ffi::OsStr,
   io::Write,
+  net::Ipv4Addr,
   process::{Command, Stdio},
 };
 
 use color_eyre::eyre::Result;
-use interprocess::local_socket::{
-  tokio::Stream, traits::tokio::Listener, GenericNamespaced, ListenerOptions,
-  ToNsName,
-};
-use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader};
+use tokio::io::{AsyncBufReadExt, BufReader};
+use tokio::net::{TcpListener, TcpStream};
+
+const PORT: u16 = 2843;
 
 #[tokio::main]
-async fn main() {
-  let listener = ListenerOptions::new()
-    .name(
-      <&str as ToNsName<'_, OsStr>>::to_ns_name::<GenericNamespaced>(
-        "kak-manager.sock",
-      )
-      .unwrap(),
-    )
-    .create_tokio()
-    .unwrap();
+async fn main() -> Result<()> {
+  let listener = TcpListener::bind((Ipv4Addr::new(127, 0, 0, 1), PORT)).await?;
 
   loop {
-    let connection = match listener.accept().await {
+    let (connection, _addr) = match listener.accept().await {
       Ok(c) => c,
       Err(e) => {
         eprintln!("Incoming connection had an issue: {e}");
@@ -41,8 +32,8 @@ async fn main() {
   }
 }
 
-async fn handle_connection(connection: Stream) -> Result<()> {
-  let mut buffered = BufReader::new(&connection);
+async fn handle_connection(connection: TcpStream) -> Result<()> {
+  let mut buffered = BufReader::new(connection);
   let mut buffer = Vec::new();
   buffered.read_until(0x03, &mut buffer).await?;
   let name = str::from_utf8(&buffer[..buffer.len() - 1])?.to_owned();
