@@ -4,7 +4,7 @@ use std::time::Duration;
 
 #[test]
 fn main() -> Result<()> {
-  let client = run_server("testing")?;
+  let client = run_server(String::from("testing"))?;
   println!("started");
   std::thread::sleep(Duration::from_secs(2));
   println!("reloading");

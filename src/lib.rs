@@ -9,12 +9,11 @@ use color_eyre::eyre::{eyre, Error, Result};
 
 const PORT: u16 = 2843;
 
-pub fn run_server(name: &str) -> std::io::Result<ClientInstance> {
+pub fn run_server(name: String) -> std::io::Result<ClientInstance> {
   let stream = TcpStream::connect((Ipv4Addr::new(127, 0, 0, 1), PORT))?;
 
   let (tx, rx) = mpsc::channel();
 
-  let name = name.to_owned();
   std::thread::spawn(move || -> Result<()> {
     let mut buffered = BufReader::new(stream);
     buffered
