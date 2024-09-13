@@ -833,12 +833,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "212d0f5754cb6769937f4501cc0e67f4f4483c8d2c3e1e922ee9edbe4ab4c7c0"
 
 [[package]]
-name = "doctest-file"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aac81fa3e28d21450aa4d2ac065992ba96a1d7303efbce51a95f4fd175b67562"
-
-[[package]]
 name = "either"
 version = "1.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1432,19 +1426,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "interprocess"
-version = "2.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2f4e4a06d42fab3e85ab1b419ad32b09eab58b901d40c57935ff92db3287a13"
-dependencies = [
- "doctest-file",
- "libc",
- "recvmsg",
- "widestring",
- "windows-sys 0.52.0",
-]
-
-[[package]]
 name = "intmap"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1517,10 +1498,9 @@ dependencies = [
 [[package]]
 name = "kak-session-manager-client"
 version = "0.1.0"
-source = "git+https://github.com/pantaelaman/kak-session-manager.git?branch=lib#110996c7a209d3cbffe3fe73dc59737648c4d8cf"
+source = "git+https://github.com/pantaelaman/kak-session-manager.git?branch=lib#04153df6076ee71bb59657cf4bbfd874e6544d00"
 dependencies = [
  "color-eyre",
- "interprocess 2.2.1",
  "oneshot",
 ]
 
@@ -1530,6 +1510,7 @@ version = "0.1.0"
 dependencies = [
  "color-eyre",
  "kak-session-manager-client",
+ "termcolor",
  "zellij-tile",
 ]
 
@@ -2415,12 +2396,6 @@ checksum = "ca3129af7b92a17112d59ad498c6f81eaf463253766b90396d39ea7a39d6613c"
 dependencies = [
  "rand_core 0.5.1",
 ]
-
-[[package]]
-name = "recvmsg"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d3edd4d5d42c92f0a659926464d4cce56b562761267ecf0f469d85b7de384175"
 
 [[package]]
 name = "redox_syscall"
@@ -3641,12 +3616,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "widestring"
-version = "1.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7219d36b6eac893fa81e84ebe06485e7dcbb616177469b142df14f1f4deb1311"
-
-[[package]]
 name = "winapi"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3868,7 +3837,7 @@ dependencies = [
  "futures",
  "humantime",
  "include_dir",
- "interprocess 1.2.1",
+ "interprocess",
  "kdl",
  "lazy_static",
  "libc",
